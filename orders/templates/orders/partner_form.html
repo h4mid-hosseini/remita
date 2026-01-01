@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+<div class="rounded-lg bg-white p-6 shadow-sm">
+    <div class="flex items-center justify-between">
+        <div>
+            <h2 class="text-xl font-semibold">{% trans "Create Partner" %}</h2>
+            <p class="text-sm text-slate-600">{% trans "Add a partner to use in orders." %}</p>
+        </div>
+        <a class="text-sm font-semibold text-slate-700" href="{% url 'orders:new' %}">{% trans "Back to order" %}</a>
+    </div>
+
+    <form method="post" class="mt-6 space-y-6">
+        {% csrf_token %}
+
+        {% if form.non_field_errors %}
+            <div class="rounded border border-red-200 bg-red-50 p-3 text-sm text-red-700">
+                {{ form.non_field_errors }}
+            </div>
+        {% endif %}
+
+        <div class="space-y-1">
+            <label class="text-sm font-medium" for="{{ form.name.id_for_label }}">{% trans "Partner name" %}</label>
+            {{ form.name }}
+            {% if form.name.errors %}
+                <p class="text-xs text-red-600">{{ form.name.errors|striptags }}</p>
+            {% endif %}
+        </div>
+
+        <button class="rounded bg-slate-900 px-4 py-2 text-sm font-semibold text-white" type="submit">
+            {% trans "Save Partner" %}
+        </button>
+    </form>
+</div>
+{% endblock %}

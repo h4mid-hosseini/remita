@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load money %}
+
+{% block content %}
+<div class="space-y-6">
+    <div class="rounded-lg bg-white p-6 shadow-sm">
+        <div class="flex items-center justify-between">
+            <div>
+                <h2 class="text-xl font-semibold">{% trans "Order" %} {{ order.id }}</h2>
+                <p class="text-sm text-slate-600">{{ order.direction }} · {{ order.partner.name }}</p>
+            </div>
+            <a class="text-sm font-semibold text-slate-700" href="{% url 'orders:new' %}">{% trans "New order" %}</a>
+        </div>
+    </div>
+
+    <div class="grid gap-4 md:grid-cols-2">
+        <div class="rounded-lg bg-white p-6 shadow-sm">
+            <h3 class="text-sm font-semibold text-slate-600">{% trans "Customer Payment" %}</h3>
+            <p class="mt-2 text-2xl font-semibold">
+                {{ calc.customer_should_pay|format_money:order.customer_payment_currency }} {{ order.customer_payment_currency }}
+            </p>
+            <p class="mt-1 text-sm text-slate-500">
+                {% trans "Customer should pay (USDT):" %} {{ calc.customer_should_pay_usdt|format_money:"USDT" }} USDT
+            </p>
+        </div>
+
+        <div class="rounded-lg bg-white p-6 shadow-sm">
+            <h3 class="text-sm font-semibold text-slate-600">{% trans "Partner Payout" %}</h3>
+            <p class="mt-2 text-2xl font-semibold">
+                {{ calc.partner_usdt_amount|format_money:"USDT" }} USDT
+            </p>
+            <p class="mt-1 text-sm text-slate-500">
+                {% trans "Partner total EUR:" %} {{ calc.partner_total_eur|format_money:"EUR" }} EUR
+            </p>
+        </div>
+    </div>
+
+    <div class="rounded-lg bg-white p-6 shadow-sm">
+        <h3 class="text-sm font-semibold text-slate-600">{% trans "Profit" %}</h3>
+            <p class="mt-2 text-2xl font-semibold">
+                {{ calc.profit_usdt|format_money:"USDT" }} USDT
+            </p>
+            {% if calc.profit_irt %}
+            <p class="mt-1 text-sm text-slate-500">{% trans "Profit in IRT:" %} {{ calc.profit_irt|format_money:"IRT" }} IRT</p>
+        {% endif %}
+    </div>
+
+    <div class="rounded-lg bg-white p-6 shadow-sm">
+        <h3 class="text-sm font-semibold text-slate-600">{% trans "Breakdown" %}</h3>
+        <div class="mt-4 grid gap-3 text-sm text-slate-700 md:grid-cols-2">
+            <div>{% trans "Requested EUR:" %} {{ order.requested_eur|format_money:"EUR" }}</div>
+            <div>{% trans "Commission EUR:" %} {{ calc.commission_eur|format_money:"EUR" }}</div>
+            <div>{% trans "Customer total EUR:" %} {{ calc.customer_total_eur|format_money:"EUR" }}</div>
+            <div>{% trans "Partner commission EUR:" %} {{ order.partner_commission_eur|format_money:"EUR" }}</div>
+            <div>{% trans "EUR → USDT rate:" %} {{ order.eur_to_usdt }}</div>
+            <div>{% trans "USDT → IRT rate:" %} {{ order.usdt_to_irt }}</div>
+            <div>{% trans "Customer paid:" %} {{ order.customer_paid_amount|format_money:order.customer_paid_currency }} {{ order.customer_paid_currency }}</div>
+            {% if calc.customer_paid_usdt and order.customer_paid_currency != "USDT" %}
+                <div>{% trans "Customer paid in USDT:" %} {{ calc.customer_paid_usdt|format_money:"USDT" }} USDT</div>
+            {% endif %}
+        </div>
+        {% if order.notes %}
+            <div class="mt-4 rounded border border-slate-200 bg-slate-50 p-3 text-sm text-slate-700">
+                <span class="font-semibold">{% trans "Notes:" %}</span> {{ order.notes }}
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

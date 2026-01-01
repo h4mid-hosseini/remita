@@ -1,0 +1,343 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-01-01 10:47+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+#: exchange_accounting/settings.py:76
+msgid "English"
+msgstr ""
+
+#: exchange_accounting/settings.py:77
+msgid "Persian"
+msgstr ""
+
+#: orders/forms.py:47
+msgid "Enter as a multiplier (0.05 for 5%)."
+msgstr ""
+
+#: orders/models.py:6 orders/models.py:81
+msgid "Name"
+msgstr ""
+
+#: orders/models.py:12 orders/models.py:49
+#: orders/templates/orders/order_list.html:65
+msgid "Partner"
+msgstr ""
+
+#: orders/models.py:13
+msgid "Partners"
+msgstr ""
+
+#: orders/models.py:20
+msgid "Incoming"
+msgstr ""
+
+#: orders/models.py:21
+msgid "Outgoing"
+msgstr ""
+
+#: orders/models.py:28
+msgid "EUR"
+msgstr ""
+
+#: orders/models.py:29 orders/models.py:36
+msgid "USDT"
+msgstr ""
+
+#: orders/models.py:30 orders/models.py:37
+msgid "IRT"
+msgstr ""
+
+#: orders/models.py:40 orders/templates/orders/order_list.html:66
+msgid "Direction"
+msgstr ""
+
+#: orders/models.py:41 orders/templates/orders/order_list.html:67
+msgid "Requested EUR"
+msgstr ""
+
+#: orders/models.py:42
+msgid "Commission percent"
+msgstr ""
+
+#: orders/models.py:44
+msgid "Partner commission EUR"
+msgstr ""
+
+#: orders/models.py:46
+msgid "EUR → USD rate"
+msgstr ""
+
+#: orders/models.py:47
+msgid "USD → IRT rate"
+msgstr ""
+
+#: orders/models.py:53
+msgid "Customer payment currency"
+msgstr ""
+
+#: orders/models.py:56
+msgid "Customer paid amount"
+msgstr ""
+
+#: orders/models.py:59
+msgid "Customer paid currency"
+msgstr ""
+
+#: orders/models.py:61
+msgid "Profit currency"
+msgstr ""
+
+#: orders/models.py:63
+msgid "Created at"
+msgstr ""
+
+#: orders/models.py:69 orders/templates/orders/order_result.html:10
+msgid "Order"
+msgstr ""
+
+#: orders/models.py:70 orders/templates/orders/order_list.html:11
+#: orders/templates/orders/order_list.html:46 templates/base.html:20
+msgid "Orders"
+msgstr ""
+
+#: orders/models.py:77
+msgid "EUR → USDT"
+msgstr ""
+
+#: orders/models.py:78
+msgid "USDT → IRT"
+msgstr ""
+
+#: orders/models.py:82
+msgid "Pair"
+msgstr ""
+
+#: orders/models.py:83
+msgid "URL"
+msgstr ""
+
+#: orders/models.py:86
+msgid "Dot-separated path like currencies.USDT.IRT.price"
+msgstr ""
+
+#: orders/models.py:87
+msgid "JSON path"
+msgstr ""
+
+#: orders/models.py:91
+msgid "Optional JSON headers, e.g. {\"Accept\":\"application/json\"}"
+msgstr ""
+
+#: orders/models.py:92
+msgid "Headers JSON"
+msgstr ""
+
+#: orders/models.py:94
+msgid "Active"
+msgstr ""
+
+#: orders/models.py:100
+msgid "Rate source"
+msgstr ""
+
+#: orders/models.py:101
+msgid "Rate sources"
+msgstr ""
+
+#: orders/templates/orders/order_form.html:8
+msgid "Create Order"
+msgstr ""
+
+#: orders/templates/orders/order_form.html:9
+msgid "Enter every number manually. The system only calculates results."
+msgstr ""
+
+#: orders/templates/orders/order_form.html:11 templates/base.html:22
+msgid "New partner"
+msgstr ""
+
+#: orders/templates/orders/order_form.html:30
+#: orders/templates/orders/order_form.html:36
+msgid "Show live suggestions"
+msgstr ""
+
+#: orders/templates/orders/order_form.html:51
+msgid "Save Order"
+msgstr ""
+
+#: orders/templates/orders/order_form.html:63
+msgid "Loading..."
+msgstr ""
+
+#: orders/templates/orders/order_form.html:71
+msgid "No suggestions available."
+msgstr ""
+
+#: orders/templates/orders/order_form.html:89
+msgid "Failed to load suggestions."
+msgstr ""
+
+#: orders/templates/orders/order_list.html:12
+msgid "Filter by date/time and review totals."
+msgstr ""
+
+#: orders/templates/orders/order_list.html:14
+#: orders/templates/orders/order_result.html:13 templates/base.html:21
+msgid "New order"
+msgstr ""
+
+#: orders/templates/orders/order_list.html:19
+msgid "Start"
+msgstr ""
+
+#: orders/templates/orders/order_list.html:26
+msgid "YYYY-MM-DD or full date/time."
+msgstr ""
+
+#: orders/templates/orders/order_list.html:29
+msgid "End"
+msgstr ""
+
+#: orders/templates/orders/order_list.html:36
+msgid "Inclusive end date/time."
+msgstr ""
+
+#: orders/templates/orders/order_list.html:39
+msgid "Apply filter"
+msgstr ""
+
+#: orders/templates/orders/order_list.html:50
+msgid "Customer should pay (USDT)"
+msgstr ""
+
+#: orders/templates/orders/order_list.html:54
+#: orders/templates/orders/order_list.html:70
+msgid "Profit (USDT)"
+msgstr ""
+
+#: orders/templates/orders/order_list.html:64
+msgid "Time"
+msgstr ""
+
+#: orders/templates/orders/order_list.html:68
+msgid "Customer (USDT)"
+msgstr ""
+
+#: orders/templates/orders/order_list.html:69
+msgid "Partner (USDT)"
+msgstr ""
+
+#: orders/templates/orders/order_list.html:85
+msgid "View"
+msgstr ""
+
+#: orders/templates/orders/order_list.html:90
+msgid "No orders found for this range."
+msgstr ""
+
+#: orders/templates/orders/order_result.html:19
+msgid "Customer Payment"
+msgstr ""
+
+#: orders/templates/orders/order_result.html:24
+msgid "Customer should pay (USDT):"
+msgstr ""
+
+#: orders/templates/orders/order_result.html:29
+msgid "Partner Payout"
+msgstr ""
+
+#: orders/templates/orders/order_result.html:34
+msgid "Partner total EUR:"
+msgstr ""
+
+#: orders/templates/orders/order_result.html:40
+msgid "Profit"
+msgstr ""
+
+#: orders/templates/orders/order_result.html:45
+msgid "Profit in IRT:"
+msgstr ""
+
+#: orders/templates/orders/order_result.html:50
+msgid "Breakdown"
+msgstr ""
+
+#: orders/templates/orders/order_result.html:52
+msgid "Requested EUR:"
+msgstr ""
+
+#: orders/templates/orders/order_result.html:53
+msgid "Commission EUR:"
+msgstr ""
+
+#: orders/templates/orders/order_result.html:54
+msgid "Customer total EUR:"
+msgstr ""
+
+#: orders/templates/orders/order_result.html:55
+msgid "Partner commission EUR:"
+msgstr ""
+
+#: orders/templates/orders/order_result.html:56
+msgid "EUR → USDT rate:"
+msgstr ""
+
+#: orders/templates/orders/order_result.html:57
+msgid "USDT → IRT rate:"
+msgstr ""
+
+#: orders/templates/orders/order_result.html:58
+msgid "Customer paid:"
+msgstr ""
+
+#: orders/templates/orders/order_result.html:60
+msgid "Customer paid in USDT:"
+msgstr ""
+
+#: orders/templates/orders/partner_form.html:8
+msgid "Create Partner"
+msgstr ""
+
+#: orders/templates/orders/partner_form.html:9
+msgid "Add a partner to use in orders."
+msgstr ""
+
+#: orders/templates/orders/partner_form.html:11
+msgid "Back to order"
+msgstr ""
+
+#: orders/templates/orders/partner_form.html:24
+msgid "Partner name"
+msgstr ""
+
+#: orders/templates/orders/partner_form.html:32
+msgid "Save Partner"
+msgstr ""
+
+#: templates/base.html:16
+msgid "Exchange Accounting"
+msgstr ""
+
+#: templates/base.html:17
+msgid "One order, one calculation."
+msgstr ""
+
+#: templates/base.html:36
+msgid "Change"
+msgstr ""

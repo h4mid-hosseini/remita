@@ -1,0 +1,134 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load money %}
+{% load locale %}
+{% get_current_language as CURRENT_LANG %}
+
+{% block content %}
+<div class="space-y-6">
+    <div class="rounded-lg bg-white p-6 shadow-sm">
+        <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+            <div>
+                <h2 class="text-xl font-semibold">{% trans "Orders" %}</h2>
+                <p class="text-sm text-slate-600">{% trans "Filter by date/time and review totals." %}</p>
+            </div>
+            <a class="text-sm font-semibold text-slate-700" href="{% url 'orders:new' %}">{% trans "New order" %}</a>
+        </div>
+
+        <form method="get" class="mt-4 grid gap-4 md:grid-cols-3">
+            <div>
+                <label class="text-sm font-medium" for="start">{% trans "Start" %}</label>
+                {% if CURRENT_LANG == "fa" %}
+                    <input class="w-full rounded border border-slate-300 px-3 py-2 text-sm" type="text" id="start_display" autocomplete="off">
+                    <input type="hidden" id="start" name="start" value="{{ start }}">
+                {% else %}
+                    <input class="w-full rounded border border-slate-300 px-3 py-2 text-sm" type="datetime-local" id="start" name="start" value="{{ start }}">
+                {% endif %}
+                <p class="text-xs text-slate-500">{% trans "YYYY-MM-DD or full date/time." %}</p>
+            </div>
+            <div>
+                <label class="text-sm font-medium" for="end">{% trans "End" %}</label>
+                {% if CURRENT_LANG == "fa" %}
+                    <input class="w-full rounded border border-slate-300 px-3 py-2 text-sm" type="text" id="end_display" autocomplete="off">
+                    <input type="hidden" id="end" name="end" value="{{ end }}">
+                {% else %}
+                    <input class="w-full rounded border border-slate-300 px-3 py-2 text-sm" type="datetime-local" id="end" name="end" value="{{ end }}">
+                {% endif %}
+                <p class="text-xs text-slate-500">{% trans "Inclusive end date/time." %}</p>
+            </div>
+            <div class="flex items-end">
+                <button class="rounded bg-slate-900 px-4 py-2 text-sm font-semibold text-white" type="submit">{% trans "Apply filter" %}</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="grid gap-4 md:grid-cols-3">
+        <div class="rounded-lg bg-white p-4 shadow-sm">
+            <p class="text-xs text-slate-500">{% trans "Orders" %}</p>
+            <p class="text-lg font-semibold">{{ totals.orders }}</p>
+        </div>
+        <div class="rounded-lg bg-white p-4 shadow-sm">
+            <p class="text-xs text-slate-500">{% trans "Customer should pay (USDT)" %}</p>
+            <p class="text-lg font-semibold">{{ totals.customer_should_pay_usdt|format_money:"USDT" }}</p>
+        </div>
+        <div class="rounded-lg bg-white p-4 shadow-sm">
+            <p class="text-xs text-slate-500">{% trans "Profit (USDT)" %}</p>
+            <p class="text-lg font-semibold">{{ totals.profit_usdt|format_money:"USDT" }}</p>
+        </div>
+    </div>
+
+    <div class="rounded-lg bg-white p-6 shadow-sm">
+        <div class="overflow-x-auto">
+            <table class="min-w-full text-left text-sm">
+                <thead class="border-b border-slate-200 text-xs uppercase text-slate-500">
+                    <tr>
+                        <th class="py-2 pr-4">{% trans "Time" %}</th>
+                        <th class="py-2 pr-4">{% trans "Partner" %}</th>
+                        <th class="py-2 pr-4">{% trans "Direction" %}</th>
+                        <th class="py-2 pr-4">{% trans "Requested EUR" %}</th>
+                        <th class="py-2 pr-4">{% trans "Customer (USDT)" %}</th>
+                        <th class="py-2 pr-4">{% trans "Partner (USDT)" %}</th>
+                        <th class="py-2 pr-4">{% trans "Profit (USDT)" %}</th>
+                        <th class="py-2 pr-4"></th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100">
+                    {% for row in rows %}
+                        <tr>
+                            <td class="py-2 pr-4">{{ row.order.created_at|format_datetime }}</td>
+                            <td class="py-2 pr-4">{{ row.order.partner.name }}</td>
+                            <td class="py-2 pr-4">{{ row.order.direction }}</td>
+                            <td class="py-2 pr-4">{{ row.order.requested_eur|format_money:"EUR" }}</td>
+                            <td class="py-2 pr-4">{{ row.calc.customer_should_pay_usdt|format_money:"USDT" }}</td>
+                            <td class="py-2 pr-4">{{ row.calc.partner_usdt_amount|format_money:"USDT" }}</td>
+                            <td class="py-2 pr-4">{{ row.calc.profit_usdt|format_money:"USDT" }}</td>
+                            <td class="py-2 pr-4">
+                                <a class="text-slate-700 underline" href="{% url 'orders:detail' row.order.pk %}">{% trans "View" %}</a>
+                            </td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td class="py-4 text-sm text-slate-500" colspan="8">{% trans "No orders found for this range." %}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% if CURRENT_LANG == "fa" %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/persian-datepicker@1.2.0/dist/css/persian-datepicker.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/persian-date@1.1.0/dist/persian-date.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/persian-datepicker@1.2.0/dist/js/persian-datepicker.js"></script>
+    <script>
+        const pad2 = (value) => String(value).padStart(2, "0");
+        const toGregorian = (unixMillis) => {
+            const date = new Date(unixMillis);
+            return `${date.getFullYear()}-${pad2(date.getMonth() + 1)}-${pad2(date.getDate())} ${pad2(date.getHours())}:${pad2(date.getMinutes())}`;
+        };
+
+        $("#start_display").persianDatepicker({
+            format: "YYYY/MM/DD HH:mm",
+            timePicker: { enabled: true },
+            onSelect: (unix) => {
+                const input = document.getElementById("start");
+                if (input) {
+                    input.value = toGregorian(unix);
+                }
+            }
+        });
+        $("#end_display").persianDatepicker({
+            format: "YYYY/MM/DD HH:mm",
+            timePicker: { enabled: true },
+            onSelect: (unix) => {
+                const input = document.getElementById("end");
+                if (input) {
+                    input.value = toGregorian(unix);
+                }
+            }
+        });
+    </script>
+{% endif %}
+{% endblock %}

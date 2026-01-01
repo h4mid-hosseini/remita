@@ -1,0 +1,252 @@
+msgid ""
+msgstr ""
+"Language: fa\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+msgid "English"
+msgstr "انگلیسی"
+
+msgid "Persian"
+msgstr "فارسی"
+
+msgid "Enter as a multiplier (0.05 for 5%)."
+msgstr "به صورت ضریب وارد کنید (0.05 برای 5٪)."
+
+msgid "Name"
+msgstr "نام"
+
+msgid "Partner"
+msgstr "همکار"
+
+msgid "Partners"
+msgstr "همکاران"
+
+msgid "Incoming"
+msgstr "ورودی"
+
+msgid "Outgoing"
+msgstr "خروجی"
+
+msgid "EUR"
+msgstr "EUR"
+
+msgid "USDT"
+msgstr "USDT"
+
+msgid "IRT"
+msgstr "IRT"
+
+msgid "Direction"
+msgstr "جهت"
+
+msgid "Requested EUR"
+msgstr "یورو درخواستی"
+
+msgid "Commission percent"
+msgstr "درصد کارمزد"
+
+msgid "Partner commission EUR"
+msgstr "کارمزد همکار (یورو)"
+
+msgid "EUR → USD rate"
+msgstr "نرخ یورو به دلار"
+
+msgid "USD → IRT rate"
+msgstr "نرخ دلار به تومان"
+
+msgid "Customer payment currency"
+msgstr "ارز پرداخت مشتری"
+
+msgid "Customer paid amount"
+msgstr "مبلغ پرداختی مشتری"
+
+msgid "Customer paid currency"
+msgstr "ارز پرداختی مشتری"
+
+msgid "Profit currency"
+msgstr "ارز سود"
+
+msgid "Notes"
+msgstr "یادداشت"
+
+msgid "Created at"
+msgstr "ایجاد شده در"
+
+msgid "Order"
+msgstr "سفارش"
+
+msgid "Orders"
+msgstr "سفارش‌ها"
+
+msgid "EUR → USDT"
+msgstr "یورو → USDT"
+
+msgid "USDT → IRT"
+msgstr "USDT → تومان"
+
+msgid "Pair"
+msgstr "جفت ارز"
+
+msgid "URL"
+msgstr "نشانی"
+
+msgid "Dot-separated path like currencies.USDT.IRT.price"
+msgstr "مسیر نقطه‌ای مثل currencies.USDT.IRT.price"
+
+msgid "JSON path"
+msgstr "مسیر JSON"
+
+msgid "Optional JSON headers, e.g. {\"Accept\":\"application/json\"}"
+msgstr "هدرهای JSON اختیاری، مثل {\"Accept\":\"application/json\"}"
+
+msgid "Headers JSON"
+msgstr "هدرهای JSON"
+
+msgid "Active"
+msgstr "فعال"
+
+msgid "Rate source"
+msgstr "منبع نرخ"
+
+msgid "Rate sources"
+msgstr "منابع نرخ"
+
+msgid "Create Order"
+msgstr "ایجاد سفارش"
+
+msgid "Enter every number manually. The system only calculates results."
+msgstr "تمام اعداد را دستی وارد کنید. سیستم فقط نتایج را محاسبه می‌کند."
+
+msgid "New partner"
+msgstr "همکار جدید"
+
+msgid "Show live suggestions"
+msgstr "نمایش پیشنهادهای زنده"
+
+msgid "Save Order"
+msgstr "ذخیره سفارش"
+
+msgid "Loading..."
+msgstr "در حال بارگذاری..."
+
+msgid "No suggestions available."
+msgstr "پیشنهادی موجود نیست."
+
+msgid "Failed to load suggestions."
+msgstr "دریافت پیشنهادها ناموفق بود."
+
+msgid "Filter by date/time and review totals."
+msgstr "بر اساس تاریخ/زمان فیلتر کنید و جمع‌ها را ببینید."
+
+msgid "New order"
+msgstr "سفارش جدید"
+
+msgid "Start"
+msgstr "شروع"
+
+msgid "YYYY-MM-DD or full date/time."
+msgstr "YYYY-MM-DD یا تاریخ/زمان کامل."
+
+msgid "End"
+msgstr "پایان"
+
+msgid "Inclusive end date/time."
+msgstr "زمان پایان به صورت شامل."
+
+msgid "Apply filter"
+msgstr "اعمال فیلتر"
+
+msgid "Customer should pay (USDT)"
+msgstr "مبلغ پرداخت مشتری (USDT)"
+
+msgid "Profit (USDT)"
+msgstr "سود (USDT)"
+
+msgid "Time"
+msgstr "زمان"
+
+msgid "Customer (USDT)"
+msgstr "مشتری (USDT)"
+
+msgid "Partner (USDT)"
+msgstr "همکار (USDT)"
+
+msgid "View"
+msgstr "مشاهده"
+
+msgid "No orders found for this range."
+msgstr "سفارشی برای این بازه پیدا نشد."
+
+msgid "Customer Payment"
+msgstr "پرداخت مشتری"
+
+msgid "Customer should pay (USDT):"
+msgstr "مبلغ پرداخت مشتری (USDT):"
+
+msgid "Partner Payout"
+msgstr "پرداخت به همکار"
+
+msgid "Partner total EUR:"
+msgstr "جمع پرداخت به همکار (یورو):"
+
+msgid "Profit"
+msgstr "سود"
+
+msgid "Profit in IRT:"
+msgstr "سود به تومان:"
+
+msgid "Breakdown"
+msgstr "جزئیات"
+
+msgid "Requested EUR:"
+msgstr "یورو درخواستی:"
+
+msgid "Commission EUR:"
+msgstr "کارمزد یورو:"
+
+msgid "Customer total EUR:"
+msgstr "جمع پرداخت مشتری (یورو):"
+
+msgid "Partner commission EUR:"
+msgstr "کارمزد همکار (یورو):"
+
+msgid "EUR → USDT rate:"
+msgstr "نرخ یورو به USDT:"
+
+msgid "USDT → IRT rate:"
+msgstr "نرخ USDT به تومان:"
+
+msgid "Customer paid:"
+msgstr "پرداختی مشتری:"
+
+msgid "Customer paid in USDT:"
+msgstr "معادل USDT پرداختی مشتری:"
+
+msgid "Notes:"
+msgstr "یادداشت:"
+
+msgid "Create Partner"
+msgstr "ایجاد همکار"
+
+msgid "Add a partner to use in orders."
+msgstr "برای استفاده در سفارش‌ها، همکار اضافه کنید."
+
+msgid "Back to order"
+msgstr "بازگشت به سفارش"
+
+msgid "Partner name"
+msgstr "نام همکار"
+
+msgid "Save Partner"
+msgstr "ذخیره همکار"
+
+msgid "Exchange Accounting"
+msgstr "حسابداری صرافی"
+
+msgid "One order, one calculation."
+msgstr "یک سفارش، یک محاسبه."
+
+msgid "Change"
+msgstr "تغییر"

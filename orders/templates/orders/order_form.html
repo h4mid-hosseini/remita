@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+<div class="rounded-lg bg-white p-6 shadow-sm">
+    <div class="flex items-center justify-between">
+        <div>
+            <h2 class="text-xl font-semibold">{% trans "Create Order" %}</h2>
+            <p class="text-sm text-slate-600">{% trans "Enter every number manually. The system only calculates results." %}</p>
+        </div>
+        <a class="text-sm font-semibold text-slate-700" href="{% url 'orders:partner_new' %}">{% trans "New partner" %}</a>
+    </div>
+
+    <form method="post" class="mt-6 space-y-6">
+        {% csrf_token %}
+
+        {% if form.non_field_errors %}
+            <div class="rounded border border-red-200 bg-red-50 p-3 text-sm text-red-700">
+                {{ form.non_field_errors }}
+            </div>
+        {% endif %}
+
+        <div class="grid gap-4 md:grid-cols-2">
+            {% for field in form %}
+                <div class="space-y-1">
+                    <label class="text-sm font-medium" for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {{ field }}
+                    {% if field.name == "eur_to_usdt" %}
+                        <div class="mt-1 text-xs text-slate-500">
+                            <button type="button" class="suggest-button underline" data-target="id_eur_to_usdt" data-pair="EUR_USDT">{% trans "Show live suggestions" %}</button>
+                            <div class="suggest-list mt-2 hidden rounded border border-slate-200 bg-slate-50 p-2 text-xs"></div>
+                        </div>
+                    {% endif %}
+                    {% if field.name == "usdt_to_irt" %}
+                        <div class="mt-1 text-xs text-slate-500">
+                            <button type="button" class="suggest-button underline" data-target="id_usdt_to_irt" data-pair="USDT_IRT">{% trans "Show live suggestions" %}</button>
+                            <div class="suggest-list mt-2 hidden rounded border border-slate-200 bg-slate-50 p-2 text-xs"></div>
+                        </div>
+                    {% endif %}
+                    {% if field.help_text %}
+                        <p class="text-xs text-slate-500">{{ field.help_text }}</p>
+                    {% endif %}
+                    {% if field.errors %}
+                        <p class="text-xs text-red-600">{{ field.errors|striptags }}</p>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+
+        <button class="rounded bg-slate-900 px-4 py-2 text-sm font-semibold text-white" type="submit">
+            {% trans "Save Order" %}
+        </button>
+    </form>
+</div>
+
+<script>
+    document.querySelectorAll(".suggest-button").forEach((button) => {
+        button.addEventListener("click", async () => {
+            const targetId = button.dataset.target;
+            const pair = button.dataset.pair;
+            const list = button.parentElement.querySelector(".suggest-list");
+            list.classList.remove("hidden");
+            list.textContent = "{% trans 'Loading...' %}";
+
+            try {
+                const response = await fetch(`/orders/rate-suggestions/?pair=${pair}`);
+                const data = await response.json();
+                list.innerHTML = "";
+
+                if (!data.items.length) {
+                    list.textContent = "{% trans 'No suggestions available.' %}";
+                    return;
+                }
+
+                data.items.forEach((item) => {
+                    const row = document.createElement("button");
+                    row.type = "button";
+                    row.className = "block w-full text-left hover:text-slate-900";
+                    row.textContent = `${item.name}: ${item.price}`;
+                    row.addEventListener("click", () => {
+                        const input = document.getElementById(targetId);
+                        if (input) {
+                            input.value = item.price;
+                        }
+                    });
+                    list.appendChild(row);
+                });
+            } catch (err) {
+                list.textContent = "{% trans 'Failed to load suggestions.' %}";
+            }
+        });
+    });
+</script>
+{% endblock %}

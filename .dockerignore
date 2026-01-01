@@ -1,0 +1,17 @@
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+*.sqlite3
+.venv/
+.git/
+.gitignore
+.env
+.env.*
+staticfiles/
+media/
+.DS_Store
+.idea/
+.vscode/
+.pytest_cache/
+locale/*/LC_MESSAGES/*.mo

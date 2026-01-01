@@ -1,0 +1,17 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.sqlite3
+.venv/
+.env
+.env.*
+staticfiles/
+media/
+.DS_Store
+.idea/
+.vscode/
+.pytest_cache/
+
+# Django translations
+locale/*/LC_MESSAGES/*.mo
