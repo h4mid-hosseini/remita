@@ -8,9 +8,9 @@ Simple internal Django app to track one manual exchange order at a time. You ent
 2. Set environment variables:
 
 ```
-export POSTGRES_DB=exchange_accounting
-export POSTGRES_USER=postgres
-export POSTGRES_PASSWORD=postgres
+export POSTGRES_DB=db_name
+export POSTGRES_USER=user_name
+export POSTGRES_PASSWORD=password
 export POSTGRES_HOST=127.0.0.1
 export POSTGRES_PORT=5432
 ```
@@ -18,7 +18,7 @@ export POSTGRES_PORT=5432
 3. Install dependencies and run migrations:
 
 ```
-pip install django psycopg2-binary
+pip install -r reqiorements.txt
 python manage.py migrate
 ```
 
