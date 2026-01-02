@@ -1,8 +1,12 @@
+from django.conf import settings
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 
 class Partner(models.Model):
+    owner = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="partners", null=True, blank=True
+    )
     name = models.CharField(max_length=200, verbose_name=_("Name"))
 
     def __str__(self):
@@ -47,6 +51,9 @@ class Order(models.Model):
     usdt_to_irt = models.DecimalField(max_digits=18, decimal_places=2, verbose_name=_("USD → IRT rate"))
     partner = models.ForeignKey(
         Partner, on_delete=models.PROTECT, related_name="orders", verbose_name=_("Partner")
+    )
+    owner = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="orders", null=True, blank=True
     )
 
     customer_payment_currency = models.CharField(

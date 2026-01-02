@@ -14,12 +14,15 @@ class PartnerCreateForm(forms.ModelForm):
 
 class OrderCreateForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
+        user = kwargs.pop("user", None)
         super().__init__(*args, **kwargs)
         for field in self.fields.values():
             existing = field.widget.attrs.get("class", "")
             field.widget.attrs["class"] = (
                 f"{existing} w-full rounded border border-slate-300 px-3 py-2 text-sm"
             ).strip()
+        if user is not None:
+            self.fields["partner"].queryset = Partner.objects.filter(owner=user)
 
     class Meta:
         model = Order

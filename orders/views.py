@@ -19,12 +19,14 @@ from .services import OrderCalculator
 @login_required
 def order_create(request):
     if request.method == "POST":
-        form = OrderCreateForm(request.POST)
+        form = OrderCreateForm(request.POST, user=request.user)
         if form.is_valid():
-            order = form.save()
+            order = form.save(commit=False)
+            order.owner = request.user
+            order.save()
             return redirect("orders:detail", pk=order.pk)
     else:
-        form = OrderCreateForm()
+        form = OrderCreateForm(user=request.user)
 
     return render(request, "orders/order_form.html", {"form": form})
 
@@ -34,7 +36,9 @@ def partner_create(request):
     if request.method == "POST":
         form = PartnerCreateForm(request.POST)
         if form.is_valid():
-            form.save()
+            partner = form.save(commit=False)
+            partner.owner = request.user
+            partner.save()
             return redirect("orders:new")
     else:
         form = PartnerCreateForm()
@@ -168,7 +172,7 @@ def order_list(request):
     end_value = request.GET.get("end")
     start_dt, end_dt = _parse_range(start_value, end_value)
 
-    orders = Order.objects.select_related("partner").order_by("-created_at")
+    orders = Order.objects.select_related("partner").filter(owner=request.user).order_by("-created_at")
     if start_dt:
         orders = orders.filter(created_at__gte=start_dt)
     if end_dt:
@@ -209,7 +213,7 @@ def order_list(request):
 
 @login_required
 def order_detail(request, pk):
-    order = get_object_or_404(Order, pk=pk)
+    order = get_object_or_404(Order, pk=pk, owner=request.user)
     calculations = OrderCalculator.calculate(order)
     return render(
         request,
