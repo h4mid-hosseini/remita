@@ -85,4 +85,8 @@ USE_TZ = True
 STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
+LOGIN_URL = "/accounts/login/"
+LOGIN_REDIRECT_URL = "/orders/new/"
+LOGOUT_REDIRECT_URL = "/accounts/login/"
+
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"

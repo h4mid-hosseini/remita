@@ -1,6 +1,7 @@
 import json
 import urllib.request
 from decimal import Decimal
+from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
@@ -15,6 +16,7 @@ from .models import Order, RateSource
 from .services import OrderCalculator
 
 
+@login_required
 def order_create(request):
     if request.method == "POST":
         form = OrderCreateForm(request.POST)
@@ -27,6 +29,7 @@ def order_create(request):
     return render(request, "orders/order_form.html", {"form": form})
 
 
+@login_required
 def partner_create(request):
     if request.method == "POST":
         form = PartnerCreateForm(request.POST)
@@ -65,6 +68,7 @@ def _extract_json_path(payload, path):
     return current
 
 
+@login_required
 def rate_suggestions(request):
     pair = request.GET.get("pair")
     if not pair:
@@ -158,6 +162,7 @@ def _parse_range(start_value, end_value):
     return start_dt, end_dt
 
 
+@login_required
 def order_list(request):
     start_value = request.GET.get("start")
     end_value = request.GET.get("end")
@@ -202,6 +207,7 @@ def order_list(request):
     )
 
 
+@login_required
 def order_detail(request, pk):
     order = get_object_or_404(Order, pk=pk)
     calculations = OrderCalculator.calculate(order)
