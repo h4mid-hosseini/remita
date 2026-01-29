@@ -56,6 +56,57 @@
 <script>
     const orderForm = document.querySelector('form[data-warn-missing-rates="true"]');
     if (orderForm) {
+        const paymentCurrency = document.getElementById("id_customer_payment_currency");
+        const paidCurrency = document.getElementById("id_customer_paid_currency");
+        const paidAmount = document.getElementById("id_customer_paid_amount");
+        const requestedEur = document.getElementById("id_requested_eur");
+        const commissionPercent = document.getElementById("id_commission_percent");
+        const eurToUsdt = document.getElementById("id_eur_to_usdt");
+        const usdtToIrt = document.getElementById("id_usdt_to_irt");
+
+        const parseNumber = (value) => {
+            if (!value) return NaN;
+            return parseFloat(String(value).replace(",", "."));
+        };
+
+        const syncPaidFields = () => {
+            if (!paymentCurrency || !paidCurrency || !paidAmount) return;
+
+            paidCurrency.value = paymentCurrency.value;
+
+            const requestedValue = parseNumber(requestedEur && requestedEur.value);
+            const commissionValue = parseNumber(commissionPercent && commissionPercent.value);
+            const eurToUsdtValue = parseNumber(eurToUsdt && eurToUsdt.value);
+            const usdtToIrtValue = parseNumber(usdtToIrt && usdtToIrt.value);
+
+            if (!isFinite(requestedValue) || !isFinite(commissionValue)) {
+                paidAmount.value = "";
+                return;
+            }
+
+            const customerTotalEur = requestedValue + (requestedValue * commissionValue);
+            let amount = customerTotalEur;
+            if (paymentCurrency.value === "USDT") {
+                if (!isFinite(eurToUsdtValue)) {
+                    paidAmount.value = "";
+                    return;
+                }
+                amount = customerTotalEur * eurToUsdtValue;
+            } else if (paymentCurrency.value === "IRT") {
+                if (!isFinite(eurToUsdtValue) || !isFinite(usdtToIrtValue)) {
+                    paidAmount.value = "";
+                    return;
+                }
+                amount = customerTotalEur * eurToUsdtValue * usdtToIrtValue;
+            }
+
+            if (!isFinite(amount)) {
+                paidAmount.value = "";
+                return;
+            }
+            paidAmount.value = amount.toFixed(2);
+        };
+
         orderForm.addEventListener("submit", (event) => {
             const eurInput = document.getElementById("id_eur_to_usdt");
             const irtInput = document.getElementById("id_usdt_to_irt");
@@ -79,6 +130,15 @@
                 }
             }
         });
+
+        ["change", "input"].forEach((eventName) => {
+            [paymentCurrency, requestedEur, commissionPercent, eurToUsdt, usdtToIrt].forEach((field) => {
+                if (field) {
+                    field.addEventListener(eventName, syncPaidFields);
+                }
+            });
+        });
+        syncPaidFields();
     }
 
     document.querySelectorAll(".suggest-button").forEach((button) => {
