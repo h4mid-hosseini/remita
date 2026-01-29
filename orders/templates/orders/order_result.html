@@ -24,7 +24,7 @@
                     <div>{% trans "Partner payout:" %} <span class="font-semibold">{{ calc.partner_total_eur|format_money:"EUR" }} EUR</span></div>
                     <div>
                         {% trans "Profit:" %}
-                        {% if calc.profit_eur_value is None %}
+                        {% if not order.eur_to_usdt %}
                             <span class="text-slate-500">{% trans "Not available (EUR rate is 0 or missing)" %}</span>
                         {% else %}
                             <span class="font-semibold">{{ calc.profit_eur_value|format_money:"EUR" }} EUR</span>
@@ -49,7 +49,7 @@
                     <div>{% trans "Partner payout:" %} <span class="font-semibold">{{ calc.partner_total_irt|format_money:"IRT" }} IRT</span></div>
                     <div>
                         {% trans "Profit:" %}
-                        {% if order.usdt_to_irt == 0 %}
+                        {% if not order.usdt_to_irt %}
                             <span class="text-slate-500">{% trans "Not available (IRT rate is 0 or missing)" %}</span>
                         {% else %}
                             <span class="font-semibold">{{ calc.profit_irt_value|format_money:"IRT" }} IRT</span>
