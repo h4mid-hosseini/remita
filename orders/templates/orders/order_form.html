@@ -11,7 +11,7 @@
         <a class="text-sm font-semibold text-slate-700" href="{% url 'orders:partner_new' %}">{% trans "New partner" %}</a>
     </div>
 
-    <form method="post" class="mt-6 space-y-6">
+    <form method="post" class="mt-6 space-y-6" data-warn-missing-rates="true">
         {% csrf_token %}
 
         {% if form.non_field_errors %}
@@ -54,6 +54,33 @@
 </div>
 
 <script>
+    const orderForm = document.querySelector('form[data-warn-missing-rates="true"]');
+    if (orderForm) {
+        orderForm.addEventListener("submit", (event) => {
+            const eurInput = document.getElementById("id_eur_to_usdt");
+            const irtInput = document.getElementById("id_usdt_to_irt");
+            const eurValue = eurInput ? parseFloat(eurInput.value) : NaN;
+            const irtValue = irtInput ? parseFloat(irtInput.value) : NaN;
+
+            const missingRates = [];
+            if (!eurInput || !eurInput.value || !isFinite(eurValue) || eurValue === 0) {
+                missingRates.push("{% trans 'EUR → USD' %}");
+            }
+            if (!irtInput || !irtInput.value || !isFinite(irtValue) || irtValue === 0) {
+                missingRates.push("{% trans 'USD → IRT' %}");
+            }
+
+            if (missingRates.length) {
+                const message = "{% trans 'Some rates are missing or 0. Profit may not be shown.' %}\n"
+                    + "{% trans 'Missing:' %} " + missingRates.join(", ")
+                    + "\n\n{% trans 'Continue and place the order?' %}";
+                if (!window.confirm(message)) {
+                    event.preventDefault();
+                }
+            }
+        });
+    }
+
     document.querySelectorAll(".suggest-button").forEach((button) => {
         button.addEventListener("click", async () => {
             const targetId = button.dataset.target;

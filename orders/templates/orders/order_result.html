@@ -22,7 +22,14 @@
                 <div class="mt-3 space-y-2 text-sm text-slate-700">
                     <div>{% trans "Customer should pay:" %} <span class="font-semibold">{{ calc.customer_total_eur|format_money:"EUR" }} EUR</span></div>
                     <div>{% trans "Partner payout:" %} <span class="font-semibold">{{ calc.partner_total_eur|format_money:"EUR" }} EUR</span></div>
-                    <div>{% trans "Profit:" %} <span class="font-semibold">{{ calc.profit_eur_value|format_money:"EUR" }} EUR</span></div>
+                    <div>
+                        {% trans "Profit:" %}
+                        {% if calc.profit_eur_value is None %}
+                            <span class="text-slate-500">{% trans "Not available (EUR rate is 0 or missing)" %}</span>
+                        {% else %}
+                            <span class="font-semibold">{{ calc.profit_eur_value|format_money:"EUR" }} EUR</span>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
 
@@ -40,7 +47,14 @@
                 <div class="mt-3 space-y-2 text-sm text-slate-700">
                     <div>{% trans "Customer should pay:" %} <span class="font-semibold">{{ calc.customer_should_pay_irt|format_money:"IRT" }} IRT</span></div>
                     <div>{% trans "Partner payout:" %} <span class="font-semibold">{{ calc.partner_total_irt|format_money:"IRT" }} IRT</span></div>
-                    <div>{% trans "Profit:" %} <span class="font-semibold">{{ calc.profit_irt_value|format_money:"IRT" }} IRT</span></div>
+                    <div>
+                        {% trans "Profit:" %}
+                        {% if order.usdt_to_irt == 0 %}
+                            <span class="text-slate-500">{% trans "Not available (IRT rate is 0 or missing)" %}</span>
+                        {% else %}
+                            <span class="font-semibold">{{ calc.profit_irt_value|format_money:"IRT" }} IRT</span>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
         </div>
