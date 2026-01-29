@@ -14,25 +14,35 @@
         </div>
     </div>
 
-    <div class="grid gap-4 md:grid-cols-2">
-        <div class="rounded-lg bg-white p-6 shadow-sm">
-            <h3 class="text-sm font-semibold text-slate-600">{% trans "Customer Payment" %}</h3>
-            <p class="mt-2 text-2xl font-semibold">
-                {{ calc.customer_should_pay|format_money:order.customer_payment_currency }} {{ order.customer_payment_currency }}
-            </p>
-            <p class="mt-1 text-sm text-slate-500">
-                {% trans "Customer should pay (USDT):" %} {{ calc.customer_should_pay_usdt|format_money:"USDT" }} USDT
-            </p>
-        </div>
+    <div class="rounded-lg bg-white p-6 shadow-sm">
+        <h3 class="text-sm font-semibold text-slate-600">{% trans "Order Detail (3 Currencies)" %}</h3>
+        <div class="mt-4 grid gap-4 md:grid-cols-3">
+            <div class="rounded-lg border border-slate-200 p-4">
+                <div class="text-xs font-semibold uppercase tracking-wide text-slate-500">EUR</div>
+                <div class="mt-3 space-y-2 text-sm text-slate-700">
+                    <div>{% trans "Customer should pay:" %} <span class="font-semibold">{{ calc.customer_total_eur|format_money:"EUR" }} EUR</span></div>
+                    <div>{% trans "Partner payout:" %} <span class="font-semibold">{{ calc.partner_total_eur|format_money:"EUR" }} EUR</span></div>
+                    <div>{% trans "Profit:" %} <span class="font-semibold">{{ calc.profit_eur_value|format_money:"EUR" }} EUR</span></div>
+                </div>
+            </div>
 
-        <div class="rounded-lg bg-white p-6 shadow-sm">
-            <h3 class="text-sm font-semibold text-slate-600">{% trans "Partner Payout" %}</h3>
-            <p class="mt-2 text-2xl font-semibold">
-                {{ calc.partner_usdt_amount|format_money:"USDT" }} USDT
-            </p>
-            <p class="mt-1 text-sm text-slate-500">
-                {% trans "Partner total EUR:" %} {{ calc.partner_total_eur|format_money:"EUR" }} EUR
-            </p>
+            <div class="rounded-lg border border-slate-200 p-4">
+                <div class="text-xs font-semibold uppercase tracking-wide text-slate-500">USD</div>
+                <div class="mt-3 space-y-2 text-sm text-slate-700">
+                    <div>{% trans "Customer should pay:" %} <span class="font-semibold">{{ calc.customer_should_pay_usdt|format_money:"USDT" }} USD</span></div>
+                    <div>{% trans "Partner payout:" %} <span class="font-semibold">{{ calc.partner_usdt_amount|format_money:"USDT" }} USD</span></div>
+                    <div>{% trans "Profit:" %} <span class="font-semibold">{{ calc.profit_usdt|format_money:"USDT" }} USD</span></div>
+                </div>
+            </div>
+
+            <div class="rounded-lg border border-slate-200 p-4">
+                <div class="text-xs font-semibold uppercase tracking-wide text-slate-500">IRT</div>
+                <div class="mt-3 space-y-2 text-sm text-slate-700">
+                    <div>{% trans "Customer should pay:" %} <span class="font-semibold">{{ calc.customer_should_pay_irt|format_money:"IRT" }} IRT</span></div>
+                    <div>{% trans "Partner payout:" %} <span class="font-semibold">{{ calc.partner_total_irt|format_money:"IRT" }} IRT</span></div>
+                    <div>{% trans "Profit:" %} <span class="font-semibold">{{ calc.profit_irt_value|format_money:"IRT" }} IRT</span></div>
+                </div>
+            </div>
         </div>
     </div>
 
